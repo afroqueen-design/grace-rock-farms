@@ -30,7 +30,7 @@ export default function ContactCTA() {
         </div>
 
         <p className="mt-8 text-sm text-black/70">
-          Available Monday - Saturday, 8:00 AM - 6:00 PM EAT
+          Available Monday - Saturday, 8:00am - 5:00pm EAT
         </p>
       </div>
     </section>

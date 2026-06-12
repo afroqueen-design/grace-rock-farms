@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { contactDetails } from "../lib/contact";
 
 export default function Footer() {
@@ -16,44 +17,44 @@ export default function Footer() {
             <h2 className="mb-4 font-semibold">Quick Links</h2>
             <ul className="space-y-2 text-sm">
               <li>
-                <a
+                <Link
                   href="/"
                   className="text-gray-400 transition hover:text-[#39B54A]"
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/products"
                   className="text-gray-400 transition hover:text-[#39B54A]"
                 >
                   Products
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/about"
                   className="text-gray-400 transition hover:text-[#39B54A]"
                 >
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  href="/training"
                   className="text-gray-400 transition hover:text-[#39B54A]"
                 >
                   Training
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/contact"
                   className="text-gray-400 transition hover:text-[#39B54A]"
                 >
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

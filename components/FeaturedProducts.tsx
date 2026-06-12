@@ -1,30 +1,7 @@
-export default function FeaturedProducts() {
-  const products = [
-    {
-      name: "Hass Avocado",
-      image:
-        "https://images.unsplash.com/photo-1519162808019-7de1683fa2ad",
-      price: "From KSh 35",
-    },
-    {
-      name: "Purple Passion",
-      image:
-        "https://images.unsplash.com/photo-1519996529931-28324d5a630e",
-      price: "From KSh 25",
-    },
-    {
-      name: "Strawberry",
-      image:
-        "https://images.unsplash.com/photo-1464965911861-746a04b4bca6",
-      price: "From KSh 20",
-    },
-    {
-      name: "Seed Potatoes",
-      image:
-        "https://images.unsplash.com/photo-1518977676601-b53f82aba655",
-      price: "Available",
-    },
-  ];
+import { getFeaturedProducts } from "../lib/supabase-products";
+
+export default async function FeaturedProducts() {
+  const { data: products } = await getFeaturedProducts();
 
   return (
     <section className="bg-white py-20">
@@ -60,9 +37,12 @@ export default function FeaturedProducts() {
                   {product.price}
                 </p>
 
-                <button className="mt-4 w-full rounded-lg bg-[#39B54A] py-3 font-semibold text-black">
+                <a
+                  href={`/products/${product.slug}`}
+                  className="mt-4 block w-full rounded-lg bg-[#39B54A] py-3 text-center font-semibold text-black"
+                >
                   View Product
-                </button>
+                </a>
               </div>
             </div>
           ))}

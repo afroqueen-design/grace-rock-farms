@@ -74,7 +74,7 @@ export default function AboutPage() {
               Since 2015, Grace Rock Farms has focused on producing reliable
               planting material under nursery conditions that support healthy
               establishment in the field. The farm expanded into seed potato
-              production in 2021, strengthening its role in Kenya's food
+              production in 2021, strengthening its role in Kenya&apos;s food
               production chain.
             </p>
           </div>

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "../../../components/Footer";
 import Navbar from "../../../components/Navbar";
-import { contactDetails } from "../../../lib/contact";
-import { getProductBySlug, products } from "../../../lib/products";
+import {
+  getProductBySlug,
+  getProductSlugs,
+} from "../../../lib/supabase-products";
 
 type ProductDetailPageProps = {
   params: Promise<{
@@ -11,17 +14,15 @@ type ProductDetailPageProps = {
   }>;
 };
 
-export function generateStaticParams() {
-  return products.map((product) => ({
-    slug: product.slug,
-  }));
+export async function generateStaticParams() {
+  return getProductSlugs();
 }
 
 export async function generateMetadata({
   params,
 }: ProductDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const { data: product } = await getProductBySlug(slug);
 
   if (!product) {
     return {
@@ -39,15 +40,11 @@ export default async function ProductDetailPage({
   params,
 }: ProductDetailPageProps) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const { data: product, error } = await getProductBySlug(slug);
 
   if (!product) {
     notFound();
   }
-
-  const whatsappMessage = encodeURIComponent(
-    `Hello Grace Rock Farms, I would like to enquire about ${product.name}.`,
-  );
 
   return (
     <main className="min-h-screen bg-[#f8f8f8] text-[#1E1E1E]">
@@ -56,12 +53,12 @@ export default async function ProductDetailPage({
       <section className="bg-[#1E1E1E] px-6 pb-20 pt-32 text-white">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
-            <a
+            <Link
               href="/products"
               className="mb-8 inline-flex text-sm font-semibold text-[#39B54A] transition hover:text-white"
             >
               Back to products
-            </a>
+            </Link>
 
             <div className="mb-4 inline-flex rounded-lg bg-[#39B54A]/10 px-4 py-2 text-sm font-semibold text-[#39B54A]">
               {product.category}
@@ -78,6 +75,12 @@ export default async function ProductDetailPage({
             <div className="mt-8 text-lg font-bold text-[#39B54A]">
               {product.price}
             </div>
+            {error ? (
+              <p className="mt-3 text-sm font-semibold text-[#fbbf24]">
+                Live catalogue data is temporarily unavailable, so fallback
+                product information is being shown.
+              </p>
+            ) : null}
           </div>
 
           <div className="overflow-hidden rounded-2xl bg-white shadow-2xl">
@@ -96,11 +99,11 @@ export default async function ProductDetailPage({
 
           <div className="mt-8 space-y-6">
             <DetailItem
-              label="Recommended Spacing"
+              label="Crop"
               value={product.spacing}
             />
-            <DetailItem label="Maturity Period" value={product.maturity} />
-            <DetailItem label="Expected Yield" value={product.expectedYield} />
+            <DetailItem label="Variety" value={product.maturity} />
+            <DetailItem label="Stock Status" value={product.expectedYield} />
           </div>
         </div>
 
@@ -115,6 +118,17 @@ export default async function ProductDetailPage({
               </li>
             ))}
           </ul>
+
+          <div className="mt-8">
+            <a
+              href="/planting-schedule.pdf"
+              download
+              className="inline-flex rounded-lg bg-[#39B54A] px-5 py-3 font-semibold text-black transition hover:bg-[#2d9a3c]"
+            >
+              Download Planting Schedule
+            </a>
+            <p className="mt-2 text-sm text-gray-500">Downloadable PDF</p>
+          </div>
         </div>
       </section>
 
@@ -130,16 +144,16 @@ export default async function ProductDetailPage({
 
           <div className="flex flex-col gap-3 sm:flex-row">
             <a
-              href={contactDetails.phones[0].href}
+              href="tel:+254110401004"
               className="rounded-lg bg-[#39B54A] px-6 py-4 text-center font-semibold text-black transition hover:bg-[#2d9a3c]"
             >
-              Call Grace Rock
+              Call to Order
             </a>
             <a
-              href={`${contactDetails.phones[0].whatsapp}?text=${whatsappMessage}`}
+              href="https://wa.me/254110401004"
               className="rounded-lg border border-white px-6 py-4 text-center font-semibold text-white transition hover:border-[#39B54A] hover:text-[#39B54A]"
             >
-              WhatsApp Enquiry
+              WhatsApp to Order
             </a>
           </div>
         </div>

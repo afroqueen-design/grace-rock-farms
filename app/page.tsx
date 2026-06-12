@@ -1,3 +1,4 @@
+import Link from "next/link";
 import WhyGraceRock from "../components/WhyGraceRock";
 import CategoryCards from "../components/CategoryCards";
 import FeaturedProducts from "../components/FeaturedProducts";
@@ -30,13 +31,19 @@ export default function Home() {
         </p>
 
         <div className="flex gap-4">
-          <button className="rounded-lg bg-[#39B54A] px-6 py-3 font-semibold text-black">
+          <Link
+            href="/products"
+            className="rounded-lg bg-[#39B54A] px-6 py-3 font-semibold text-black"
+          >
             Shop Now
-          </button>
+          </Link>
 
-          <button className="rounded-lg border border-white px-6 py-3 font-semibold">
+          <Link
+            href="/contact"
+            className="rounded-lg border border-white px-6 py-3 font-semibold"
+          >
             Contact Us
-          </button>
+          </Link>
         </div>
       </section>
       <TrustStrip />
