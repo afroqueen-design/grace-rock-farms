@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import AssistantWidget from "../components/ai-assistant/AssistantWidget";
 import FloatingWhatsApp from "../components/FloatingWhatsApp";
 import "./globals.css";
 
@@ -31,6 +32,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {children}
+        <AssistantWidget />
         <FloatingWhatsApp />
       </body>
     </html>

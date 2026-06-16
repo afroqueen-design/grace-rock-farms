@@ -74,6 +74,24 @@ const partnerTypes = [
   "Agribusiness partners",
 ];
 
+const trainingImages = [
+  {
+    src: "/training/farmers-transplanting-seedlings.jpg",
+    alt: "Farmers transplanting seedlings during Grace Rock Farms training",
+    title: "Hands-on transplanting",
+  },
+  {
+    src: "/training/demo-farm-field.jpg",
+    alt: "Grace Rock Farms demonstration farm field",
+    title: "Demo farm learning",
+  },
+  {
+    src: "/training/cabbage-demonstration-plot.jpg",
+    alt: "Cabbage demonstration plot at Grace Rock Farms",
+    title: "Cabbage demonstration plot",
+  },
+];
+
 const registrationMessage =
   "Hello Grace Rock Farms, I would like to register for a training or upcoming event.";
 
@@ -113,15 +131,16 @@ export default function TrainingPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-8 shadow-2xl">
+          <div className="overflow-hidden rounded-lg border border-white/10 bg-white/5 shadow-2xl">
             <Image
-              src="/logo.png"
-              alt="Grace Rock Farms"
-              width={320}
-              height={160}
-              className="mb-8 max-w-64"
+              src="/training/farmers-transplanting-seedlings.jpg"
+              alt="Farmers transplanting seedlings during Grace Rock Farms training"
+              width={1200}
+              height={800}
+              priority
+              className="h-80 w-full object-cover"
             />
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-4 p-6 sm:grid-cols-2">
               {[
                 "Field learning",
                 "Crop demonstrations",
@@ -137,6 +156,41 @@ export default function TrainingPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-6 py-16">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 max-w-3xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#39B54A]">
+              Learning in the Field
+            </p>
+            <h2 className="mt-3 text-4xl font-bold">
+              Practical sessions built around real farm decisions.
+            </h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {trainingImages.map((image) => (
+              <figure
+                key={image.src}
+                className="overflow-hidden rounded-lg bg-[#f8f8f8] shadow-sm"
+              >
+                <div className="relative h-64">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover"
+                  />
+                </div>
+                <figcaption className="px-5 py-4 font-semibold text-[#1E1E1E]">
+                  {image.title}
+                </figcaption>
+              </figure>
+            ))}
           </div>
         </div>
       </section>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import ContactCTA from "../../components/ContactCTA";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
@@ -42,6 +43,24 @@ const focusAreas = [
   "Farmer success",
 ];
 
+const aboutImages = [
+  {
+    src: "/about/commercial-seedling-nursery.jpg",
+    alt: "Grace Rock Farms commercial seedling nursery",
+    title: "Commercial seedling nursery",
+  },
+  {
+    src: "/about/greenhouse-exterior.jpg",
+    alt: "Grace Rock Farms greenhouse exterior",
+    title: "Controlled greenhouse production",
+  },
+  {
+    src: "/about/hass-avocado-seedlings.jpg",
+    alt: "Hass avocado seedlings at Grace Rock Farms",
+    title: "Fruit tree seedlings",
+  },
+];
+
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-[#f8f8f8] text-[#1E1E1E]">
@@ -60,6 +79,51 @@ export default function AboutPage() {
             2015, producing quality vegetable seedlings, fruit tree seedlings
             and certified seed potatoes for farmers.
           </p>
+        </div>
+      </section>
+
+      <section className="bg-white px-6 py-16">
+        <div className="mx-auto max-w-7xl">
+          <div className="relative h-[320px] overflow-hidden rounded-lg bg-[#1E1E1E] shadow-xl md:h-[440px]">
+            <Image
+              src="/about/commercial-seedling-nursery.jpg"
+              alt="Grace Rock Farms commercial seedling nursery"
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+            <div className="absolute bottom-0 left-0 max-w-2xl p-6 text-white md:p-8">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#39B54A]">
+                Propagation Capacity
+              </p>
+              <h2 className="mt-3 text-3xl font-bold md:text-4xl">
+                Nursery systems built for dependable farmer supply.
+              </h2>
+            </div>
+          </div>
+
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
+            {aboutImages.map((image) => (
+              <figure
+                key={image.src}
+                className="overflow-hidden rounded-lg bg-[#f8f8f8] shadow-sm"
+              >
+                <div className="relative h-56">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover"
+                  />
+                </div>
+                <figcaption className="px-5 py-4 font-semibold text-[#1E1E1E]">
+                  {image.title}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 
